@@ -1,8 +1,17 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import { useEffect, useState } from "react";
 
-const PlaceType = ({ item }) => {
+const PlaceType = ({ item, selected = "" }) => {
+  const [select, setSelect] = useState(false);
+  useEffect(() => {
+    if (item.name === selected) {
+      setSelect(true);
+    } else {
+      setSelect(false);
+    }
+  }, [item, selected]);
   return (
     <>
       <List
@@ -11,14 +20,15 @@ const PlaceType = ({ item }) => {
           maxWidth: 600,
           bgcolor: "background.paper",
           padding: "0px",
-          borderColor: "rgba(0, 0, 0, 0.2)", 
-          borderWidth: "1px", 
+          borderColor: select ? "#ff69b4" : "transparent",
+          borderWidth: "2px",
           borderStyle: "solid",
-          borderRadius:"3%",
+          borderRadius: "3%",
+
           "&:hover": {
             // backgroundColor:"red",
             borderColor: "#ff69b4", // Pinkish color
-            borderWidth: "1px", // Border width
+            borderWidth: "2px", // Border width
             borderStyle: "solid",
           },
         }}

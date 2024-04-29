@@ -1,16 +1,26 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const CategoryCard = ({ item }) => {
+const CategoryCard = ({ item, selected = "" }) => {
+  const [select, setSelect] = useState(false);
+  useEffect(() => {
+    if (item.label  === selected) {
+      setSelect(true);
+    } else {
+      setSelect(false);
+    }
+  }, [item, selected]);
   return (
     <>
       <Paper
         elevation={2}
         sx={{
+          borderColor: select? "#ff69b4" : "transparent",
+          borderWidth: "2px",
+          borderStyle: "solid",
           "&:hover": {
-            // backgroundColor:"red",
-            borderColor: "#ff69b4", // Pinkish color
-            borderWidth: "1px", // Border width
+            borderColor: "#ff69b4", 
+            borderWidth: "2px", 
             borderStyle: "solid",
           },
         }}

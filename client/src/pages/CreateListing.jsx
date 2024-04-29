@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Box, Divider, Grid, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  TextField,
+  TextareaAutosize,
+  Typography,
+} from "@mui/material";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import { categories, facilities, types } from "../data";
 import CategoryCard from "../components/CategoryCard";
@@ -12,7 +20,14 @@ import { DeleteForever } from "@mui/icons-material";
 const CreateListing = () => {
   /* UPLOAD, DRAG & DROP, REMOVE PHOTOS */
   const [photos, setPhotos] = useState([]);
-  console.log(photos);
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
+  const [amenities, setAmenities] = useState([]);
+
+  console.log("*********************************")
+  console.log(category)
+  console.log(type)
+  // console.log(photos);
 
   const handleUploadPhotos = (e) => {
     const newPhotos = e.target.files;
@@ -67,8 +82,15 @@ const CreateListing = () => {
             <Box mt={1} />
             <Grid container spacing={1}>
               {categories.map((item, index) => (
-                <Grid key={index} item xs={6} sm={4} lg={2}>
-                  <CategoryCard item={item} />
+                <Grid
+                  key={index}
+                  item
+                  xs={6}
+                  sm={4}
+                  lg={2}
+                  onClick={() => setCategory(item.label)}
+                >
+                  <CategoryCard item={item} selected={category}/>
                 </Grid>
               ))}
             </Grid>
@@ -81,8 +103,8 @@ const CreateListing = () => {
             </Typography>
             <Box mt={1}>
               {types.map((item, index) => (
-                <Box mt={1}>
-                  <PlaceType item={item} />
+                <Box mt={1} onClick={()=>setType(item.name)}>
+                  <PlaceType item={item} selected={type}/>
                 </Box>
               ))}
             </Box>
@@ -211,7 +233,7 @@ const CreateListing = () => {
           {/* let's add some pictures */}
           <Box mt={3}>
             <Typography color={"black"} variant="p">
-              Upload Phtots of your place from your device
+              Upload Phots of your place from your device
             </Typography>
             {/* Drag and drop start here */}
             <DragDropContext onDragEnd={handleDragPhoto}>
@@ -278,7 +300,7 @@ const CreateListing = () => {
                                       maxWidth: "100%",
                                       maxHeight: "180px",
                                       objectFit: "cover",
-                                      borderRadius: "8px"
+                                      borderRadius: "8px",
                                     }}
                                   />
                                   <button
@@ -292,7 +314,7 @@ const CreateListing = () => {
                                       cursor: "pointer",
                                     }}
                                   >
-                                      <DeleteForever></DeleteForever>
+                                    <DeleteForever></DeleteForever>
                                   </button>
                                 </Box>
                               )}
@@ -312,11 +334,11 @@ const CreateListing = () => {
                           htmlFor="image"
                           style={{
                             color: "black",
-                            display:"flex",
+                            display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
                             cursor: "pointer",
-                            flexDirection:"column",
+                            flexDirection: "column",
                             padding: "8px",
                           }}
                         >
@@ -331,7 +353,78 @@ const CreateListing = () => {
             </DragDropContext>
             {/* Drag and drop end in here */}
           </Box>
+          <Box mt={3}>
+            <Typography variant="h6" fontWeight={"bold"} mb={1} mt={3}>
+              What makes your place attractive and exciting?
+            </Typography>
+            <Box width={{ sm: "100%", md: "50%" }}>
+              <TextField
+                fullWidth
+                variant="filled"
+                label="Title"
+                type="text"
+                InputLabelProps={{
+                  style: { color: "rgba(0, 0, 0, 0.5)" },
+                }}
+                InputProps={{
+                  style: { color: "black" },
+                }}
+              />
+              <TextareaAutosize
+                style={{ width: "100%", color: "black", marginTop: "8px" }}
+                aria-label="Description"
+                minRows={3}
+                placeholder="descirption"
+              />
+              <TextField
+                fullWidth
+                variant="filled"
+                label="Highlight"
+                type="text"
+                InputLabelProps={{
+                  style: { color: "rgba(0, 0, 0, 0.5)" },
+                }}
+                InputProps={{
+                  style: { color: "black" },
+                }}
+              />
+              <TextareaAutosize
+                style={{ width: "100%", color: "black", marginTop: "8px" }}
+                aria-label="Description"
+                minRows={3}
+                placeholder="Highlight Details"
+              />
+            </Box>
+            <Typography variant="h6" fontWeight={"bold"} mb={1} mt={3}>
+              Now set your price
+            </Typography>
+            <TextField
+              variant="filled"
+              label="Price"
+              type="number"
+              InputLabelProps={{
+                style: { color: "rgba(0, 0, 0, 0.5)" },
+              }}
+              InputProps={{
+                style: { color: "black" },
+              }}
+            />
+          </Box>
         </Box>
+        <Button
+          style={{
+            fontSize: "1rem",
+            backgroundColor: "#ff69b4",
+            color: "white",
+            padding: "5px 10px",
+            borderRadius: "8px",
+            marginTop: "8px",
+            marginBottom: "8px",
+            color: "black",
+          }}
+        >
+          Create listing
+        </Button>
       </Box>
     </>
   );

@@ -101,7 +101,7 @@ const Navbar = () => {
                 {user ? (
                   <Avatar
                     alt="Remy Sharp"
-                    src={`http://localhost:4000/${user.profileImagePath.replace(
+                    src={`http://localhost:4000/${user?.profileImagePath?.replace(
                       "public",
                       ""
                     )}`}
