@@ -20,13 +20,40 @@ import { DeleteForever } from "@mui/icons-material";
 const CreateListing = () => {
   /* UPLOAD, DRAG & DROP, REMOVE PHOTOS */
   const [photos, setPhotos] = useState([]);
-  const [category, setCategory] = useState("");
-  const [type, setType] = useState("");
+  const [category, setCategory] = useState(null);
+  const [type, setType] = useState(null);
   const [amenities, setAmenities] = useState([]);
+  //location state
+  const [formLoaction, setFormLoaction] = useState({
+    streetAddress: "",
+    aptSuite: "",
+    city: "",
+    province: "",
+    country: "",
+  });
 
-  console.log("*********************************")
-  console.log(category)
-  console.log(type)
+  const handleChangeLocation = (e) => {
+    const { name, value } = e.target;
+    setFormLoaction({
+      ...formLoaction,
+      [name]: value,
+    });
+  };
+  //basic counts
+  const [guestCount, setGuestCount] = useState(1);
+
+  const [bedRooms, setBedRooms] = useState(1);
+  const [beds, setBeds] = useState(1);
+  const [bathrooms, setBathrooms] = useState(1);
+  const handleGuestCountChange = (newCount) => {
+    setGuestCount(newCount);
+  };
+
+  console.log("*********************************");
+  console.log(category);
+  console.log(type);
+  console.log(formLoaction);
+  console.log(guestCount)
   // console.log(photos);
 
   const handleUploadPhotos = (e) => {
@@ -90,7 +117,7 @@ const CreateListing = () => {
                   lg={2}
                   onClick={() => setCategory(item.label)}
                 >
-                  <CategoryCard item={item} selected={category}/>
+                  <CategoryCard item={item} selected={category} />
                 </Grid>
               ))}
             </Grid>
@@ -103,8 +130,8 @@ const CreateListing = () => {
             </Typography>
             <Box mt={1}>
               {types.map((item, index) => (
-                <Box mt={1} onClick={()=>setType(item.name)}>
-                  <PlaceType item={item} selected={type}/>
+                <Box mt={1} onClick={() => setType(item.name)}>
+                  <PlaceType item={item} selected={type} />
                 </Box>
               ))}
             </Box>
@@ -121,6 +148,9 @@ const CreateListing = () => {
                 label="Street address"
                 type="text"
                 size="small"
+                name="streetAddress"
+                value={formLoaction.streetAddress}
+                onChange={handleChangeLocation}
                 InputLabelProps={{
                   style: { color: "rgba(0, 0, 0, 0.5)" },
                 }}
@@ -136,6 +166,9 @@ const CreateListing = () => {
                     label="Apartments, Suits,etc if applicable"
                     type="text"
                     size="small"
+                    name="aptSuite"
+                    value={formLoaction.aptSuite}
+                    onChange={handleChangeLocation}
                     InputLabelProps={{
                       style: { color: "rgba(0, 0, 0, 0.5)" },
                     }}
@@ -151,6 +184,9 @@ const CreateListing = () => {
                     label="city"
                     type="text"
                     size="small"
+                    name="city"
+                    value={formLoaction.city}
+                    onChange={handleChangeLocation}
                     InputLabelProps={{
                       style: { color: "rgba(0, 0, 0, 0.5)" },
                     }}
@@ -168,6 +204,9 @@ const CreateListing = () => {
                     label="Province"
                     type="text"
                     size="small"
+                    name="province"
+                    value={formLoaction.province}
+                    onChange={handleChangeLocation}
                     InputLabelProps={{
                       style: { color: "rgba(0, 0, 0, 0.5)" },
                     }}
@@ -183,6 +222,9 @@ const CreateListing = () => {
                     label="Country"
                     type="text"
                     size="small"
+                    name="country"
+                    value={formLoaction.country}
+                    onChange={handleChangeLocation}
                     InputLabelProps={{
                       style: { color: "rgba(0, 0, 0, 0.5)" },
                     }}
@@ -197,7 +239,7 @@ const CreateListing = () => {
                 Share the basics about your place?
               </Typography>
               <Box sx={{ "& > *": { marginBottom: "16px" } }}>
-                <GroupButtons type={"Guests"} />
+              <GroupButtons type={"Guests"} onCountChange={handleGuestCountChange} />
                 <GroupButtons type={"Bedrooms"} />
                 <GroupButtons type={"Beds"} />
                 <GroupButtons type={"Bathrooms"} />

@@ -2,14 +2,27 @@ import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
 import { Box, ButtonGroup, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
 
-const GroupButtons = ({ type }) => {
+const GroupButtons = ({ type, onCountChange }) => {
   const [count, setCount] = useState(1);
+  
   const increment = () => {
-    setCount(count + 1);
+    const newCount = count + 1;
+    setCount(newCount);
+    if (onCountChange) {
+      onCountChange(newCount); // Notify parent about the updated count
+    }
   };
+
   const decrement = () => {
-    if (count > 0) setCount(count - 1);
+    if (count > 0) {
+      const newCount = count - 1;
+      setCount(newCount);
+      if (onCountChange) {
+        onCountChange(newCount); // Notify parent about the updated count
+      }
+    }
   };
+
   return (
     <>
       <ButtonGroup variant="contained" aria-label="Basic button group">
@@ -21,7 +34,7 @@ const GroupButtons = ({ type }) => {
         >
           <Typography>{type}</Typography>
         </Box>
-        <IconButton onClick={() => increment()}>
+        <IconButton onClick={increment}>
           <AddCircleOutline
             sx={{
               "&:hover": {
@@ -33,7 +46,7 @@ const GroupButtons = ({ type }) => {
         <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
           <Typography>{count}</Typography>
         </Box>
-        <IconButton onClick={() => decrement()}>
+        <IconButton onClick={decrement}>
           <RemoveCircleOutline
             sx={{
               "&:hover": {
