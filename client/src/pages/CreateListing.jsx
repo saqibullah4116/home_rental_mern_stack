@@ -30,8 +30,8 @@ const CreateListing = () => {
     city: "",
     province: "",
     country: "",
+    price: null,
   });
-
   const handleChangeLocation = (e) => {
     const { name, value } = e.target;
     setFormLoaction({
@@ -39,21 +39,49 @@ const CreateListing = () => {
       [name]: value,
     });
   };
+
+  //place type  form
+  const [formType, setFormType] = useState({
+    title: "",
+    description: "",
+    highlight: "",
+    highlightDetails: "",
+  });
+  const handleChangePlaceType = (e) => {
+    const { name, value } = e.target;
+    setFormType({
+      ...formType,
+      [name]: value,
+    });
+  };
+
   //basic counts
   const [guestCount, setGuestCount] = useState(1);
-
   const [bedRooms, setBedRooms] = useState(1);
   const [beds, setBeds] = useState(1);
   const [bathrooms, setBathrooms] = useState(1);
   const handleGuestCountChange = (newCount) => {
     setGuestCount(newCount);
   };
+  const handleBedRoomsCountChange = (newCount) => {
+    setBedRooms(newCount);
+  };
+  const handleBedsCountChange = (newCount) => {
+    setBeds(newCount);
+  };
+  const handleBathRoomsCountChange = (newCount) => {
+    setBathrooms(newCount);
+  };
 
   console.log("*********************************");
   console.log(category);
   console.log(type);
   console.log(formLoaction);
-  console.log(guestCount)
+  console.log(guestCount);
+  console.log(bedRooms);
+  console.log(beds);
+  console.log(bathrooms);
+  console.log(formType);
   // console.log(photos);
 
   const handleUploadPhotos = (e) => {
@@ -239,10 +267,22 @@ const CreateListing = () => {
                 Share the basics about your place?
               </Typography>
               <Box sx={{ "& > *": { marginBottom: "16px" } }}>
-              <GroupButtons type={"Guests"} onCountChange={handleGuestCountChange} />
-                <GroupButtons type={"Bedrooms"} />
-                <GroupButtons type={"Beds"} />
-                <GroupButtons type={"Bathrooms"} />
+                <GroupButtons
+                  type={"Guests"}
+                  onCountChange={handleGuestCountChange}
+                />
+                <GroupButtons
+                  type={"Bedrooms"}
+                  onCountChange={handleBedRoomsCountChange}
+                />
+                <GroupButtons
+                  type={"Beds"}
+                  onCountChange={handleBedsCountChange}
+                />
+                <GroupButtons
+                  type={"Bathrooms"}
+                  onCountChange={handleBathRoomsCountChange}
+                />
               </Box>
             </Box>
           </Box>
@@ -405,6 +445,9 @@ const CreateListing = () => {
                 variant="filled"
                 label="Title"
                 type="text"
+                name="title"
+                value={formType.title}
+                onChange={handleChangePlaceType}
                 InputLabelProps={{
                   style: { color: "rgba(0, 0, 0, 0.5)" },
                 }}
@@ -417,12 +460,18 @@ const CreateListing = () => {
                 aria-label="Description"
                 minRows={3}
                 placeholder="descirption"
+                name="description"
+                value={formType.description}
+                onChange={handleChangePlaceType}
               />
               <TextField
                 fullWidth
                 variant="filled"
                 label="Highlight"
                 type="text"
+                name="highlight"
+                value={formType.highlight}
+                onChange={handleChangePlaceType}
                 InputLabelProps={{
                   style: { color: "rgba(0, 0, 0, 0.5)" },
                 }}
@@ -432,9 +481,12 @@ const CreateListing = () => {
               />
               <TextareaAutosize
                 style={{ width: "100%", color: "black", marginTop: "8px" }}
-                aria-label="Description"
+                aria-label="Highlight Details"
                 minRows={3}
                 placeholder="Highlight Details"
+                name="highlightDetails"
+                value={formType.highlightDetails}
+                onChange={handleChangePlaceType}
               />
             </Box>
             <Typography variant="h6" fontWeight={"bold"} mb={1} mt={3}>
@@ -444,6 +496,9 @@ const CreateListing = () => {
               variant="filled"
               label="Price"
               type="number"
+              name="price"
+              value={formType.price}
+              onChange={handleChangePlaceType}
               InputLabelProps={{
                 style: { color: "rgba(0, 0, 0, 0.5)" },
               }}
