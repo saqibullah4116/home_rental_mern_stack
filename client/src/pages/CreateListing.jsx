@@ -16,13 +16,16 @@ import PlaceType from "../components/PlaceType";
 import GroupButtons from "../components/GroupButtons";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DeleteForever } from "@mui/icons-material";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateListing = () => {
+  const navigate = useNavigate();
   /* UPLOAD, DRAG & DROP, REMOVE PHOTOS */
   const [photos, setPhotos] = useState([]);
   const [category, setCategory] = useState(null);
   const [type, setType] = useState(null);
-  const [amenities, setAmenities] = useState([]);
+  // const [amenities, setAmenities] = useState([]);
   //location state
   const [formLoaction, setFormLoaction] = useState({
     streetAddress: "",
@@ -46,6 +49,7 @@ const CreateListing = () => {
     description: "",
     highlight: "",
     highlightDetails: "",
+    price: 0,
   });
   const handleChangePlaceType = (e) => {
     const { name, value } = e.target;
@@ -82,7 +86,7 @@ const CreateListing = () => {
   console.log(beds);
   console.log(bathrooms);
   console.log(formType);
-  // console.log(photos);
+  console.log(photos);
 
   const handleUploadPhotos = (e) => {
     const newPhotos = e.target.files;
@@ -103,6 +107,48 @@ const CreateListing = () => {
     setPhotos((prevPhotos) =>
       prevPhotos.filter((_, index) => index !== indexToRemove)
     );
+  };
+
+  const creatorId = useSelector((state) => state.user._id);
+  console.log(creatorId);
+  const handlePost = async (e) => {
+    e.preventDefault();
+    try {
+      const listingFormData = new FormData();
+      listingFormData.append("creator", creatorId);
+      listingFormData.append("category", category);
+      listingFormData.append("type", type);
+      listingFormData.append("streetAddress", formLoaction.streetAddress);
+      listingFormData.append("aptSuite", formLoaction.aptSuite);
+      listingFormData.append("city", formLoaction.city);
+      listingFormData.append("province", formLoaction.province);
+      listingFormData.append("country", formLoaction.country);
+      listingFormData.append("guestCount", guestCount);
+      listingFormData.append("bedroomCount", bedRooms);
+      listingFormData.append("bedCount", beds);
+      listingFormData.append("bathroomCount", bathrooms);
+      // ListingFormData.append("amenities", amenities)
+      listingFormData.append("title", formType.title);
+      listingFormData.append("description", formType.description);
+      listingFormData.append("highlight", formType.highlight);
+      listingFormData.append("highlightDesc", formType.highlightDetails);
+      listingFormData.append("price", formType.price);
+      // appending photo
+      photos.forEach((photo) => {
+        listingFormData.append("listingPhotos", photo);
+      });
+
+      // sending post request to server
+      const response = await fetch("http://localhost:4000/listing/create", {
+        method: "POST",
+        body: listingFormData,
+      });
+      if (response.ok) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("Publish listing failed", error.message);
+    }
   };
 
   return (
@@ -509,6 +555,7 @@ const CreateListing = () => {
           </Box>
         </Box>
         <Button
+        onClick={handlePost}
           style={{
             fontSize: "1rem",
             backgroundColor: "#ff69b4",

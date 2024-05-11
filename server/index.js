@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config()
 const cors = require("cors")
 
 const authRoutes = require("./routes/auth")
+const listingRoutes = require("./routes/listing")
 
 app.use(cors())
 app.use(express.json())
@@ -12,7 +13,7 @@ app.use(express.static('public'))
 
 // Routes
 app.use("/auth",authRoutes)
-
+app.use("/listing",listingRoutes)
 
   
 // mongose setup 
