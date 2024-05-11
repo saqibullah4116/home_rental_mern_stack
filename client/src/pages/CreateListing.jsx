@@ -555,7 +555,7 @@ const CreateListing = () => {
           </Box>
         </Box>
         <Button
-        onClick={handlePost}
+          onClick={handlePost}
           style={{
             fontSize: "1rem",
             backgroundColor: "#ff69b4",
