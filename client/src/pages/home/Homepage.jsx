@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/Navbar";
 import CategorySectionForHomepage from "./components/CategorySectionForHomepage";
 import HeroBanner from "./components/HeroBanner";
+import SelectingCategory from "./components/SelectingCategory";
 
 const Homepage = () => {
   return (
@@ -9,6 +10,7 @@ const Homepage = () => {
       <Navbar />
       <HeroBanner />
       <CategorySectionForHomepage />
+      <SelectingCategory/>
     </>
   );
 };

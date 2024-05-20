@@ -6,12 +6,23 @@ const Categories = ({ imageUrl, icon, label }) => {
     <Box
       sx={{
         position: "relative",
-        width: "180px",
-        height: "180px",
+        width: {
+          xs: "150px",
+          sm: "180px",
+          md: "200px",
+          lg: "220px",
+        },
+        height: {
+          xs: "150px",
+          sm: "180px",
+          md: "200px",
+          lg: "220px",
+        },
         backgroundImage: `url(${imageUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        borderRadius:"10px"
       }}
     >
       <Box
@@ -21,14 +32,15 @@ const Categories = ({ imageUrl, icon, label }) => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)", 
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           transition: "transform 0.5s ease-in-out",
+          borderRadius:"10px",
           "&:hover": {
-            transform: "scale(0.7)", 
+            transform: "scale(0.7)",
           },
         }}
       >
