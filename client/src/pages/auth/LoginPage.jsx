@@ -1,7 +1,7 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { setLogin } from "../redux/state";
+import { setLogin } from "../../redux/state";
 import { useDispatch } from "react-redux";
 import Alert from "@mui/material/Alert";
 

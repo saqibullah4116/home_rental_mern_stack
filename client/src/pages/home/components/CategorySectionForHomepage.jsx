@@ -1,7 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
-import Categories from "./Categories";
-import { categories } from "../data";
+import Categories from "../../createListing/components/Categories";
+import { categories } from "../../../data";
 
 const CategorySectionForHomepage = () => {
   return (

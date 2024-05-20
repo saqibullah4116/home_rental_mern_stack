@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import HeroBanner from "../components/HeroBanner";
-import CategorySectionForHomepage from "../components/CategorySectionForHomepage";
+import Navbar from "../../components/Navbar";
+import CategorySectionForHomepage from "./components/CategorySectionForHomepage";
+import HeroBanner from "./components/HeroBanner";
 
 const Homepage = () => {
   return (

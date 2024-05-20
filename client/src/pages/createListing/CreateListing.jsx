@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import {
   Box,
   Button,
@@ -10,10 +10,10 @@ import {
   Typography,
 } from "@mui/material";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
-import { categories, facilities, types } from "../data";
-import CategoryCard from "../components/CategoryCard";
-import PlaceType from "../components/PlaceType";
-import GroupButtons from "../components/GroupButtons";
+import { categories, facilities, types } from "../../data";
+import CategoryCard from "./components/CategoryCard";
+import PlaceType from "../../components/PlaceType";
+import GroupButtons from "../../components/GroupButtons";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { DeleteForever } from "@mui/icons-material";
 import { useSelector } from "react-redux";

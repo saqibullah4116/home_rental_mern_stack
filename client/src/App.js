@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import RegisterPage from "./pages/RegisterPage";
-import LoginPage from "./pages/LoginPage";
 import { ThemeProvider } from "@emotion/react";
-import { theme } from "./theme";
 import { CssBaseline } from "@mui/material";
-import CreateListing from "./pages/CreateListing";
+
+import { theme } from "./theme";
+import CreateListing from "./pages/createListing/CreateListing";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import Homepage from "./pages/home/Homepage";
 
 function App() {
   return (
