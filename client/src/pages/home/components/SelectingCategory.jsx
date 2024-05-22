@@ -12,6 +12,7 @@ import {
 import Carousel from "react-material-ui-carousel";
 import { categories } from "../../../data";
 import { setListings } from "../../../redux/state";
+import { Link } from "react-router-dom";
 
 const SelectingCategory = () => {
   const [category, setCategory] = useState("All");
@@ -133,42 +134,44 @@ const SelectingCategory = () => {
           <Box display={"flex"} alignItems={"center"} justifyContent={"center"}>
             <span>No listings available for </span>
             <Typography variant="h5" color={"#ff69b4"} fontWeight={"bold"}>
-              {"  "+category}
+              {"  " + category}
             </Typography>{" "}
           </Box>
         ) : (
           <Grid container spacing={2}>
             {listings.map((listing, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Card style={{backgroundColor:"#f7f7f7"}}>
-                  <Carousel>
-                    {listing.listingPhotosPath.map((path, index) => (
-                      <CardMedia
-                        key={index}
-                        component="img"
-                        height="140"
-                        image={`http://localhost:4000/${path.replace(
-                          "public",
-                          ""
-                        )}`}
-                        alt={`Listing Image ${index + 1}`}
-                      />
-                    ))}
-                  </Carousel>
-                  <CardContent>
-                    <Typography variant="h6">{listing.title}</Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {listing.description}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      color="black"
-                      fontWeight={"bold"}
-                    >
-                      {listing.price} USD
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <Link to={`/properties/${listing._id}`}>
+                  <Card style={{ backgroundColor: "#f7f7f7" }}>
+                    <Carousel>
+                      {listing.listingPhotosPath.map((path, index) => (
+                        <CardMedia
+                          key={index}
+                          component="img"
+                          height="140"
+                          image={`http://localhost:4000/${path.replace(
+                            "public",
+                            ""
+                          )}`}
+                          alt={`Listing Image ${index + 1}`}
+                        />
+                      ))}
+                    </Carousel>
+                    <CardContent>
+                      <Typography variant="h6">{listing.title}</Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {listing.description}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        color="black"
+                        fontWeight={"bold"}
+                      >
+                        {listing.price} USD
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
               </Grid>
             ))}
           </Grid>
