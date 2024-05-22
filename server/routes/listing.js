@@ -78,7 +78,6 @@ router.post("/create", upload.array("listingPhotos"), async (req, res) => {
 });
 
 // getting the listing
-
 router.get("/", async (req, res) => {
   const qCategory = req.query.category;
   try {
@@ -96,6 +95,24 @@ router.get("/", async (req, res) => {
       .status(400)
       .json({ message: "Fail to get Listings", error: error.message });
     console.log(error);
+  }
+});
+
+//now getting single listing.
+router.get("/:listingId", async (req, res) => {
+  try {
+    const { listingId } = req.params;
+    const sinlgeListing = await Listing.findById(listingId);
+    if (sinlgeListing) {
+      res.status(200).json(sinlgeListing);
+    } else {
+      res.status(400).json({ message: "No Listing found against this id" });
+    }
+    res.status(200).json(sinlgeListing);
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Fail to get Listings", error: error.message });
   }
 });
 
