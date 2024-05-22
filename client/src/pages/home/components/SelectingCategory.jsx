@@ -124,8 +124,8 @@ const SelectingCategory = () => {
               <Skeleton
                 key={index}
                 variant="rectangular"
-                width={210}
-                height={118}
+                height="250px"
+                width="250px"
               />
             ))}
           </Box>
