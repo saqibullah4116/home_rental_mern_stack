@@ -104,16 +104,14 @@ router.get("/:listingId", async (req, res) => {
     const { listingId } = req.params;
     const sinlgeListing = await Listing.findById(listingId);
     if (sinlgeListing) {
-      res.status(200).json(sinlgeListing);
+      return res.status(200).json(sinlgeListing);
     } else {
-      res.status(400).json({ message: "No Listing found against this id" });
+      return res.status(400).json({ message: "No Listing found against this id" });
     }
-    res.status(200).json(sinlgeListing);
   } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Fail to get Listings", error: error.message });
+    return res.status(400).json({ message: "Fail to get Listings", error: error.message });
   }
 });
+
 
 module.exports = router;

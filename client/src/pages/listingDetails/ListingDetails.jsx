@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Divider, Grid, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 
 const ListingDetails = () => {
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState(null);
-
+  console.log("**************************************");
+  console.log(listing);
   const { listingId } = useParams();
 
   const fetchSingleListing = async () => {
@@ -54,8 +55,68 @@ const ListingDetails = () => {
         paddingTop={2}
       >
         <Typography variant="h5" fontWeight={"bold"}>
-          {listing?.title}
+          {listing?.fetchedSingleListing?.title}
         </Typography>
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          {listing?.fetchedSingleListing?.listingPhotosPath.map(
+            (path, index) => (
+              <Grid item xs={12} sm={4} md={3} key={index}>
+                <Box
+                  component="img"
+                  src={`http://localhost:4000/${path?.replace("public", "")}`}
+                  sx={{
+                    position: "relative",
+                    width: {
+                      xs: "150px",
+                      sm: "180px",
+                      md: "200px",
+                      lg: "220px",
+                    },
+                    height: {
+                      xs: "150px",
+                      sm: "180px",
+                      md: "200px",
+                      lg: "220px",
+                    },
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "no-repeat",
+                    borderRadius: "10px",
+                  }}
+                />
+              </Grid>
+            )
+          )}
+        </Grid>
+        <Box mt={4}>
+          <Typography variant="h5" fontWeight={"bold"}>
+            {listing?.fetchedSingleListing?.type} in{" "}
+            {listing?.fetchedSingleListing?.city},
+            {listing?.fetchedSingleListing?.province},
+            {listing?.fetchedSingleListing?.country}
+          </Typography>
+          <Typography variant="body1">
+            {listing?.fetchedSingleListing.guestCount} guest,
+            {listing?.fetchedSingleListing?.bedroomCount}-bedroom,
+            {listing?.fetchedSingleListing?.bedCount}-bed,
+            {listing?.fetchedSingleListing?.bathroomCount}-bath
+          </Typography>
+          <Box mb={1}/>
+          <Divider />
+          <Box padding={1}>
+            <Avatar
+              alt="Remy Sharp"
+              // src={`http://localhost:4000/${user?.profileImagePath?.replace(
+              //   "public",
+              //   ""
+              // )}`}
+              style={{
+                border: "2px solid lightgray",
+              }}
+            />
+          </Box>
+          <Divider />
+        </Box>
       </Box>
     </>
   );
