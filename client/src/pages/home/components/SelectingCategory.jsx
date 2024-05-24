@@ -141,22 +141,22 @@ const SelectingCategory = () => {
           <Grid container spacing={2}>
             {listings.map((listing, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>
-                <Link to={`/properties/${listing._id}`}>
-                  <Card style={{ backgroundColor: "#f7f7f7" }}>
-                    <Carousel>
-                      {listing.listingPhotosPath.map((path, index) => (
-                        <CardMedia
-                          key={index}
-                          component="img"
-                          height="140"
-                          image={`http://localhost:4000/${path.replace(
-                            "public",
-                            ""
-                          )}`}
-                          alt={`Listing Image ${index + 1}`}
-                        />
-                      ))}
-                    </Carousel>
+                <Card style={{ backgroundColor: "#f7f7f7" }}>
+                  <Carousel>
+                    {listing.listingPhotosPath.map((path, index) => (
+                      <CardMedia
+                        key={index}
+                        component="img"
+                        height="140"
+                        image={`http://localhost:4000/${path.replace(
+                          "public",
+                          ""
+                        )}`}
+                        alt={`Listing Image ${index + 1}`}
+                      />
+                    ))}
+                  </Carousel>
+                  <Link to={`/properties/${listing._id}`}>
                     <CardContent>
                       <Typography variant="h6">{listing.title}</Typography>
                       <Typography variant="body2" color="textSecondary">
@@ -170,8 +170,8 @@ const SelectingCategory = () => {
                         {listing.price} USD
                       </Typography>
                     </CardContent>
-                  </Card>
-                </Link>
+                  </Link>
+                </Card>
               </Grid>
             ))}
           </Grid>
