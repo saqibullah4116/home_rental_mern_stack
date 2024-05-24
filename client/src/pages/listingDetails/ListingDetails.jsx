@@ -101,21 +101,32 @@ const ListingDetails = () => {
             {listing?.fetchedSingleListing?.bedCount}-bed,
             {listing?.fetchedSingleListing?.bathroomCount}-bath
           </Typography>
-          <Box mb={1}/>
+          <Box mb={1} />
           <Divider />
-          <Box padding={1}>
+          <Box padding={1} display={"flex"} alignItems={"center"}>
             <Avatar
               alt="Remy Sharp"
-              // src={`http://localhost:4000/${user?.profileImagePath?.replace(
-              //   "public",
-              //   ""
-              // )}`}
+              src={`http://localhost:4000/${listing?.fetchedSingleListing?.creator?.profileImagePath?.replace(
+                "public",
+                ""
+              )}`}
               style={{
                 border: "2px solid lightgray",
               }}
             />
+            <Typography ml={2}>
+              {` ${listing?.fetchedSingleListing?.creator?.firstName} ${listing?.fetchedSingleListing?.creator?.lastName}`}
+            </Typography>
           </Box>
           <Divider />
+          <Box>
+            <Typography variant="h5" fontWeight={"bold"} mt={2}>
+              Description
+            </Typography>
+            <Typography mb={1}>
+              {listing?.fetchedSingleListing?.description}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </>

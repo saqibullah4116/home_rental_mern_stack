@@ -102,16 +102,19 @@ router.get("/", async (req, res) => {
 router.get("/:listingId", async (req, res) => {
   try {
     const { listingId } = req.params;
-    const sinlgeListing = await Listing.findById(listingId);
+    const sinlgeListing = await Listing.findById(listingId).populate("creator");
     if (sinlgeListing) {
       return res.status(200).json(sinlgeListing);
     } else {
-      return res.status(400).json({ message: "No Listing found against this id" });
+      return res
+        .status(400)
+        .json({ message: "No Listing found against this id" });
     }
   } catch (error) {
-    return res.status(400).json({ message: "Fail to get Listings", error: error.message });
+    return res
+      .status(400)
+      .json({ message: "Fail to get Listings", error: error.message });
   }
 });
-
 
 module.exports = router;
